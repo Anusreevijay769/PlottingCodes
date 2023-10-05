@@ -3,12 +3,14 @@
 
 #include "plotvar_t.h"
 
-const plotVar_t commonplotvars_chs[] = {
+const plotVar_t controlplotvars_CHS[] = {
 ////    plotvar	MINRange  MAXRange  NBINS  slog xlabel outfile AMINRange  AMAXRange ANBINS drawleg
 ////
-// { "nPV",		0, 50, 50, 1,	"Number of primary vertices", "nPV", 	0, 50, 50, 1},
-//------------    LEPTONS  	-------------------
+//{ "nPV",		0, 50, 50, 1,	"Number of primary vertices", "nPV", 	0, 50, 50, 1},
+// ------------    LEPTONS  	-------------------
 
+//  { "pTL1",             0, 390, 26, 1,          "Lepton p_{T} (GeV)",     "lepton_pt",       0,  390, 26, 1 },
+ { "nFatJet",             0, 10, 10, 1,          "Number of Electrons",     "nElectrons",       0,  10, 10, 1 },
 // { "l_pt1",		0, 390, 26, 3,		"Lepton p_{T} (GeV)",     "lepton_pt",       0,  390, 26, 1 },
 // { "l_eta1",		-2.5, 2.5, 8, 1,	"Lepton #eta",            "lepton_eta",    -2.5,  2.5,  8, 0 },
 // { "l_iso1", 	0, 3.0, 15, 2, "Lepton isolation",		"l_iso1",    0, 3.0, 15, 1},
@@ -65,7 +67,7 @@ const plotVar_t commonplotvars_chs[] = {
 //
 //
 ////----------------	4 body mass	---------------
-{ "mass_lvj_type0_PuppiAK8", 	600, 2500, 4, 3, "M_{WW} (GeV)",		"mass_lvj_type0_PuppiAK8_4bin",    600, 2500, 4, 1},
+//{ "mass_lvj_type0_PuppiAK8", 	600, 2500, 4, 3, "M_{WW} (GeV)",		"mass_lvj_type0_PuppiAK8_4bin",    600, 2500, 4, 1},
 // //{ "mt_lvj_type0_PuppiAK8", 	600, 2500, 4, 3, "MT_{WW} (GeV)",		"mt_lvj_type0_PuppiAK8_4bin",    600, 2500, 4, 1},
 // //{ "mass_lvj_type0_PuppiAK8", 	600, 2500, 38, 3, "M_{WW} (GeV)",		"mass_lvj_type0_PuppiAK8_38bin",    600, 2500, 38, 1},
 // //{ "mt_lvj_type0_PuppiAK8", 	600, 2500, 38, 3, "MT_{WW} (GeV)",		"mt_lvj_type0_PuppiAK8_38bin",    600, 2500, 38, 1},
