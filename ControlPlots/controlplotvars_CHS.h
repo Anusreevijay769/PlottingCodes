@@ -10,7 +10,7 @@ const plotVar_t controlplotvars_CHS[] = {
 // ------------    LEPTONS  	-------------------
 
 //  { "pTL1",             0, 390, 26, 1,          "Lepton p_{T} (GeV)",     "lepton_pt",       0,  390, 26, 1 },
- { "nFatJet",             0, 10, 10, 1,          "Number of Electrons",     "nElectrons",       0,  10, 10, 1 },
+ { "nFatJet",             0, 10, 10, 1,          "Number of FatJets",     "nFatJet",       0,  10, 10, 1 },
 // { "l_pt1",		0, 390, 26, 3,		"Lepton p_{T} (GeV)",     "lepton_pt",       0,  390, 26, 1 },
 // { "l_eta1",		-2.5, 2.5, 8, 1,	"Lepton #eta",            "lepton_eta",    -2.5,  2.5,  8, 0 },
 // { "l_iso1", 	0, 3.0, 15, 2, "Lepton isolation",		"l_iso1",    0, 3.0, 15, 1},
