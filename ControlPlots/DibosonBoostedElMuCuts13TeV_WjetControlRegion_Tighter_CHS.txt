@@ -1,6 +1,6 @@
 #  Name                     Cut string
 #"type=ele(1),muon(0)
-"2 lepton"  "(nElectron >= 0)"
+"2 lepton"  "(nElectron > 0)"
 #"mu"			"(type==0||type==1)"
 #"1 lepton"              "(l_pt2<0 && l_pt1>50 && (((type==0)&&(abs(l_eta1)<2.4)) || ((type==1)&&((abs(l_eta1)<2.5)&&!(abs(l_eta1)>1.4442 && abs(l_eta1)<1.566)))))"
 #"pfMETpuppi>30"         "(((type==0)&&(pfMET_Corr>50)) || ((type==1)&&(pfMET_Corr>80)))"
