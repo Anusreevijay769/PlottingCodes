@@ -21,6 +21,6 @@ DYJets_PS_2	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-100to20
 DYJets_PS_3	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-200to400_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_200to400.root	40.99	1	18455718	1	40	1
 DYJets_PS_4	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-400to600_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_400to600.root	5.678	1	8682257	1	25	1
 DYJets_PS_5	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-600to800_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_600to800.root	1.367	1	7035971	1	32	1
-DYJets_PS_6	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-800to1200_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_800to1200.root	0.634	6554679	1	30	1
-DYJets_PS_7	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-1200to2500_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_1200to2500.root	0.1514	5966661	1	44	1
-DYJets_PS_8	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-2500toInf_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_2500toInf.root	0.003565	1978203	1	41	1
+DYJets_PS_6	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-800to1200_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_800to1200.root	0.634	1	6554679	1	30	1
+DYJets_PS_7	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-1200to2500_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_1200to2500.root	0.1514	1	5966661	1	44	1
+DYJets_PS_8	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-2500toInf_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_2500toInf.root	0.003565	1	1978203	1	41	1
