@@ -46,7 +46,7 @@ SampleInfo_t;
 //#include "controlplotvars_boosted.h"
 //#include "controlplotvars_common.h"
 #include "controlplotvars_CHS.h"
-#include "controlplotvars_CHS_2lep.h"
+//#include "controlplotvars_CHS_2lep.h"
 //#include "controlplotvars_Puppi.h"
 //#include "controlplotvars_vbf.h"
 //#include "controlplotvars_mva.h"
@@ -136,9 +136,10 @@ public:
     info_ = sinfo;
     tree_ = 0;
     //cout << "sample = " << name_ << endl;
-    //TFile *f = new TFile (sinfo.treefilename, "READ"); if (!f) { cerr << "Couldn't find file " << sinfo.treefilename << endl; return; }
-    TFile *f =  TFile::Open("root://cmsxrootd.fnal.gov/"+sinfo.treefilename, "READ"); if (!f) { cerr << "Couldn't find file " << sinfo.treefilename << endl; return; }
-    tree_ =  (TTree *)f->Get("otree"); if (!tree_) { cerr << "Couldn't find tree otree in file " << sinfo.treefilename << endl; return; }
+    TFile *f = new TFile (sinfo.treefilename, "READ"); if (!f) { cerr << "Couldn't find file " << sinfo.treefilename << endl; return; }
+   // TFile *f =  TFile::Open("root://cmsxrootd.fnal.gov/"+sinfo.treefilename, "READ"); if (!f) { cerr << "Couldn't find file " << sinfo.treefilename << endl; return; }
+   // tree_ =  (TTree *)f->Get("otree"); if (!tree_) { cerr << "Couldn't find tree otree in file " << sinfo.treefilename << endl; return; }
+    tree_ =  (TTree *)f->Get("Events"); if (!tree_) { cerr << "Couldn't find tree Events in file " << sinfo.treefilename << endl; return; }
   }
   ~Sample() { if (tree_) delete tree_; }
   TTree *Tree() const { return tree_; }
@@ -254,7 +255,8 @@ void loadSamples(const char *filename,vector<Sample *>& samples)
 
 void myControlPlots(const char *cuttablefilename,
 		    const char *samplefilename,
-		    const plotVar_t plotvars[] = commonplotvars_chs,
+//		    const plotVar_t plotvars[] = commonplotvars_chs,
+		    const plotVar_t plotvars[] = controlplotvars_CHS,
 		    const string OutRootFile = "testrk.root",
 		    const int ScaleSignal = 0,
 		    const string RecreateAppend = "RECREATE",
@@ -356,7 +358,7 @@ void myControlPlots(const char *cuttablefilename,
     //
     //TCut the_cut(TString("L1_PrefweightUp*btag0Wgt*genWeight*trig_eff_Weight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));
     //TCut the_cut(TString("L1_PrefweightDown*btag0Wgt*genWeight*trig_eff_Weight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));
-    TCut the_cut(TString("L1_Prefweight*btag0Wgt*genWeight*trig_eff_Weight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));
+    TCut the_cut(TString("1*(")+unwtcutstring+TString(")"));
     //TCut the_cut(TString("trig_eff_Weight*btag0Wgt*genWeight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));
     //TCut the_cut(TString("btag1Wgt*genWeight*trig_eff_Weight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));	// For Top control region
     //
