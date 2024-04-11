@@ -398,7 +398,9 @@ void myControlPlots(const char *cuttablefilename,
         //
         // TCut the_cut(TString("L1_PrefweightUp*btag0Wgt*genWeight*trig_eff_Weight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));
         // TCut the_cut(TString("L1_PrefweightDown*btag0Wgt*genWeight*trig_eff_Weight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));
-        TCut the_cut(TString("1*(") + unwtcutstring + TString(")"));
+        // TCut the_cut(TString("*(") + unwtcutstring + TString(")"));
+        // TCut the_cut(TString("1*(") + unwtcutstring + TString(")"));
+        TCut the_cut(TString("puWeight*(") + unwtcutstring + TString(")"));
         // TCut the_cut(TString("trig_eff_Weight*btag0Wgt*genWeight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));
         // TCut the_cut(TString("btag1Wgt*genWeight*trig_eff_Weight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));	// For Top control region
         //
