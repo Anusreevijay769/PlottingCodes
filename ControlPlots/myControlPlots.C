@@ -1,33 +1,34 @@
-#include <algorithm>
+// #include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <map>
-#include <string>
+// #include <string>
 #include <vector>
-#include <assert.h>
-#include "TROOT.h"
-#include "TLatex.h"
+// #include <assert.h>
+// #include "TROOT.h"
+// #include "TLatex.h"
 #include "TTree.h"
 #include "TFile.h"
 #include "TH1D.h"
-#include "TH1F.h"
+// #include "TBox.h"
+// #include "TH1F.h"
 #include "THStack.h"
-#include "TString.h"
+// #include "TString.h"
 #include "TLegend.h"
-#include "TLine.h"
-#include "TPad.h"
+// #include "TLine.h"
+// #include "TPad.h"
 #include "TCanvas.h"
 #include "TCut.h"
 #include "TSystem.h"
-#include "TF1.h"
-#include "TFitResult.h"
-#include "TFitResultPtr.h"
+// #include "TF1.h"
+// #include "TFitResult.h"
+// #include "TFitResultPtr.h"
 
 #include "tdrstyle.C"
 #include "utils.C" // Tokenize
 #include "CMS_lumi.C"
 
-#include <Python.h>
+// #include <Python.h>
 
 
 typedef struct
@@ -56,7 +57,6 @@ typedef struct
 // #include "controlplotvars_CHS_signal_2lep.h"
 // #include "controlplotvars_UpDn.h"
 
-using namespace std;
 
 double intLUMIinvpb;
 
@@ -98,7 +98,7 @@ void loadCutString(const char *filename, TString &cutstring)
     FILE *fp = fopen(filename, "r");
     if (!fp)
     {
-        cout << "Error, file " << TString(filename) << " not found." << endl;
+        std::cout << "Error, file " << TString(filename) << " not found." << std::endl;;;
         exit(-1);
     }
 
@@ -112,9 +112,9 @@ void loadCutString(const char *filename, TString &cutstring)
         if (cutstring.Length())
             cutstring += " && ";
 
-        string strline(line);
+        std::string strline(line);
         strline.pop_back(); // shed the \n
-        vector<string> fields;
+        std::vector<std::string> fields;
 
         // expect columns with fields cutname, cutvalue, possible embedded spaces both
         // within and between, so " " or "\t" cannot be used as delimiters. Require quotes
@@ -123,7 +123,7 @@ void loadCutString(const char *filename, TString &cutstring)
         Tokenize(strline, fields, "\"");
 
         // for (size_t j=0; j<fields.size(); j++)
-        // cout << j << ": \"" << fields[j] << "\"" << endl;
+        // std::cout << j << ": \"" << fields[j] << "\"" << std::endl;;
 
         assert(fields.size() == 3);
         cutstring += TString(fields.at(2));
@@ -139,19 +139,19 @@ public:
     {
         info_ = sinfo;
         tree_ = 0;
-        // cout << "sample = " << name_ << endl;
+        // std::cout << "sample = " << name_ << std::endl;;
         TFile *f = new TFile(sinfo.treefilename, "READ");
         if (!f)
         {
-            cerr << "Couldn't find file " << sinfo.treefilename << endl;
+            std::cerr << "Couldn't find file " << sinfo.treefilename << std::endl;;
             return;
         }
-        // TFile *f =  TFile::Open("root://cmsxrootd.fnal.gov/"+sinfo.treefilename, "READ"); if (!f) { cerr << "Couldn't find file " << sinfo.treefilename << endl; return; }
-        // tree_ =  (TTree *)f->Get("otree"); if (!tree_) { cerr << "Couldn't find tree otree in file " << sinfo.treefilename << endl; return; }
+        // TFile *f =  TFile::Open("root://cmsxrootd.fnal.gov/"+sinfo.treefilename, "READ"); if (!f) { std::cerr << "Couldn't find file " << sinfo.treefilename << std::endl;; return; }
+        // tree_ =  (TTree *)f->Get("otree"); if (!tree_) { std::cerr << "Couldn't find tree otree in file " << sinfo.treefilename << std::endl;; return; }
         tree_ = (TTree *)f->Get("Events");
         if (!tree_)
         {
-            cerr << "Couldn't find tree Events in file " << sinfo.treefilename << endl;
+            std::cerr << "Couldn't find tree Events in file " << sinfo.treefilename << std::endl;;
             return;
         }
     }
@@ -170,19 +170,19 @@ public:
     {
         if (!tree_)
         {
-            cerr << "No tree to draw from." << endl;
+            std::cerr << "No tree to draw from." << std::endl;;
             return 0;
         }
         double tmp = 0.;
-        cout << "\tDrawing " << pv.plotvar << " for sample = " << info_.samplename << " ... ";
+        std::cout << "\tDrawing " << pv.plotvar << " for sample = " << info_.samplename << " ... ";
         TString hname = TString("th1") + pv.outfile + Form("%d", info_.index);
         TH1D *histo = new TH1D(hname, hname, pv.NBINS, pv.MINRange, pv.MAXRange);
         assert(histo);
         histo->Sumw2();
-        cout << tree_->Draw(pv.plotvar + TString(">>") + hname, cut, "goff") << " entries, ";
+        std::cout << tree_->Draw(pv.plotvar + TString(">>") + hname, cut, "goff") << " entries, ";
         histo->SetBinContent(pv.NBINS, histo->GetBinContent(pv.NBINS) + histo->GetBinContent(pv.NBINS + 1));
-        // cout << histo->Integral() << " " << tmp << " " << "weighted entries, (";
-        cout << histo->IntegralAndError(0, histo->GetNbinsX() + 1, tmp) << " " << tmp << " "
+        // std::cout << histo->Integral() << " " << tmp << " " << "weighted entries, (";
+        std::cout << histo->IntegralAndError(0, histo->GetNbinsX() + 1, tmp) << " " << tmp << " "
              << "weighted entries";
 
 #if 0
@@ -198,12 +198,12 @@ public:
 #endif
         if (info_.nMCevents)
         {
-            // cout<<"\n===> Evetns = "<<info_.xsecpblumi<<"\t"<<info_.nMCevents<<"\t"<<info_.MCnegEvent<<"\t"<<info_.colorcode<<endl;
+            // std::cout<<"\n===> Evetns = "<<info_.xsecpblumi<<"\t"<<info_.nMCevents<<"\t"<<info_.MCnegEvent<<"\t"<<info_.colorcode<<std::endl;;
             histo->Scale((info_.xsecpblumi * info_.otherscale) / (info_.nMCevents - 2 * info_.MCnegEvent));
-            cout << ", " << histo->IntegralAndError(1, histo->GetNbinsX(), tmp) << " " << tmp << " " << (histo->Integral(1, histo->GetNbinsX() + 1) * info_.xsecpblumi * info_.otherscale) / (info_.nMCevents - 2 * info_.MCnegEvent) << " "
+            std::cout << ", " << histo->IntegralAndError(1, histo->GetNbinsX(), tmp) << " " << tmp << " " << (histo->Integral(1, histo->GetNbinsX() + 1) * info_.xsecpblumi * info_.otherscale) / (info_.nMCevents - 2 * info_.MCnegEvent) << " "
                  << " scaled events in window";
         }
-        cout << endl;
+        std::cout << std::endl;;
 
         return histo;
     }
@@ -215,12 +215,12 @@ private:
 
 //======================================================================
 
-void loadSamples(const char *filename, vector<Sample *> &samples)
+void loadSamples(const char *filename, std::vector<Sample *> &samples)
 {
     FILE *fp = fopen(filename, "r");
     if (!fp)
     {
-        cout << "Error, file " << TString(filename) << " not found." << endl;
+        std::cout << "Error, file " << TString(filename) << " not found." << std::endl;;
         exit(-1);
     }
 
@@ -233,9 +233,9 @@ void loadSamples(const char *filename, vector<Sample *> &samples)
         if (!strlen(line) || line[0] == '#')
             continue; // comments are welcome
 
-        string strline(line);
+        std::string strline(line);
         strline.pop_back(); // shed the \n
-        vector<string> fields;
+        std::vector<std::string> fields;
 
         // expect columns with fields cutname, cutvalue, possible embedded spaces both
         // within and between, so " " or "\t" cannot be used as delimiters. Require quotes
@@ -244,7 +244,7 @@ void loadSamples(const char *filename, vector<Sample *> &samples)
         Tokenize(strline, fields, " \t");
 
         // for (size_t j=0; j<fields.size(); j++)
-        // cout << j << ": \"" << fields[j] << "\"" << endl;
+        // std::cout << j << ": \"" << fields[j] << "\"" << std::endl;;
 
         assert(fields.size() == 8);
 
@@ -259,7 +259,7 @@ void loadSamples(const char *filename, vector<Sample *> &samples)
         s.colorcode = str2int(fields[6]);
         s.stackit = str2int(fields[7]);
 
-        cout << "Loading sample " << s.samplename << " -> " << s.treefilename << endl;
+        std::cout << "Loading sample " << s.samplename << " -> " << s.treefilename << std::endl;;
 
         if (!samples.size())
         {
@@ -267,11 +267,11 @@ void loadSamples(const char *filename, vector<Sample *> &samples)
             {
                 intLUMIinvpb = s.xsecpblumi;
                 s.xsecpblumi = 1;
-                cout << "intLUMI = " << intLUMIinvpb << " pb^-1" << endl;
+                std::cout << "intLUMI = " << intLUMIinvpb << " pb^-1" << std::endl;;
             }
             else
             {
-                cerr << "First sample in the table must be 'data'" << endl;
+                std::cerr << "First sample in the table must be 'data'" << std::endl;;
                 exit(-1);
             }
         }
@@ -290,10 +290,10 @@ void myControlPlots(const char *cuttablefilename,
                     const char *samplefilename,
                     //		    const plotVar_t plotvars[] = commonplotvars_chs,
                     const plotVar_t plotvars[] = controlplotvars_CHS,
-                    const string OutRootFile = "testrk.root",
-                    const string OutDir = "OutDir",
+                    const std::string OutRootFile = "testrk.root",
+                    const std::string OutDir = "OutDir",
                     const int ScaleSignal = 0,
-                    const string RecreateAppend = "RECREATE",
+                    const std::string RecreateAppend = "RECREATE",
                     const int isData = 1)
 //		    const plotVar_t plotvars[] = boostedplotvars )
 {
@@ -301,13 +301,13 @@ void myControlPlots(const char *cuttablefilename,
     if (int(ScaleSignal) != 1 && int(ScaleSignal) != 0)
     {
         std::cout << "=========================================\n\n"
-                  << endl;
+                  << std::endl;;
         std::cerr << "Error: Scale Signal values should be  1 or 0.\n"
-                  << endl;
+                  << std::endl;;
         exit(-1);
     }
 
-    ofstream Logfile;
+    std::ofstream Logfile;
 
     TH1D::SetDefaultSumw2(1);
 
@@ -326,7 +326,7 @@ void myControlPlots(const char *cuttablefilename,
 
     // Get the input trees:
 
-    vector<Sample *> samples;
+    std::vector<Sample *> samples;
 
     loadSamples(samplefilename, samples);
 
@@ -335,25 +335,25 @@ void myControlPlots(const char *cuttablefilename,
     Sample *sdata = samples[0];
 
     if (sdata->Tree())
-        cout << "ndata =" << sdata->Tree()->GetEntries() << endl;
+        std::cout << "ndata =" << sdata->Tree()->GetEntries() << std::endl;;
     TFile *f;
 
     if (strcmp(RecreateAppend.c_str(), "RECREATE") == 0)
     {
         f = new TFile(OutRootFile.c_str(), "RECREATE");
-        cout << "RECREATE file " << OutRootFile.c_str() << endl;
+        std::cout << "RECREATE file " << OutRootFile.c_str() << std::endl;;
     }
     else if (strcmp(RecreateAppend.c_str(), "UPDATE") == 0)
     {
         f = new TFile(OutRootFile.c_str(), "UPDATE");
-        cout << "UPDATE file " << OutRootFile.c_str() << endl;
+        std::cout << "UPDATE file " << OutRootFile.c_str() << std::endl;;
     }
     else
     {
         std::cout << "=========================================\n\n"
-                  << endl;
+                  << std::endl;;
         std::cerr << "Error: Root file option can either be RECREATE or UPDATE...\n"
-                  << endl;
+                  << std::endl;;
         exit(-1);
     }
     // TFile f("plotvar_histo.root", "RECREATE");
@@ -377,25 +377,25 @@ void myControlPlots(const char *cuttablefilename,
         const std::string spaces(temp.Length(), ' ');
         const std::string second = "* " + spaces + " *";
         const std::string first(second.size(), '*');
-        Logfile << first << std::endl;
-        Logfile << second << std::endl;
-        Logfile << "* " << temp << " *" << std::endl;
-        Logfile << second << std::endl;
+        Logfile << first << std::endl;;
+        Logfile << second << std::endl;;
+        Logfile << "* " << temp << " *" << std::endl;;
+        Logfile << second << std::endl;;
         if (int(ScaleSignal) == 1)
-            Logfile << "* \t signal is scaled by 50..." << endl;
-        Logfile << second << std::endl;
-        Logfile << first << std::endl;
+            Logfile << "* \t signal is scaled by 50..." << std::endl;;
+        Logfile << second << std::endl;;
+        Logfile << first << std::endl;;
 
         if (!pv.plotvar.Length())
             break;
 
-        cout << pv.plotvar << "\t" << pv.MINRange << "\t" << pv.MAXRange << "\t" << pv.NBINS << "\tTHE CUT " << endl;
+        std::cout << pv.plotvar << "\t" << pv.MINRange << "\t" << pv.MAXRange << "\t" << pv.NBINS << "\tTHE CUT " << std::endl;;
 
         if (!pv.plotvar.Contains("_smeared"))
             if (sdata->Tree() &&
                 sdata->Tree()->Draw(pv.plotvar, "", "goff", 1) == -1)
             { // check if the variable exists in the tree
-                cout << "\t...can't be plotted!" << endl;
+                std::cout << "\t...can't be plotted!" << std::endl;;
                 continue;
             }
 
@@ -417,7 +417,7 @@ void myControlPlots(const char *cuttablefilename,
 
         TCut nullcut("");
 
-        cout << "the_cut = " << the_cut << endl;
+        std::cout << "the_cut = " << the_cut << std::endl;;
 
         const double BINWIDTH = ((pv.MAXRange - pv.MINRange) / pv.NBINS);
 
@@ -450,7 +450,7 @@ void myControlPlots(const char *cuttablefilename,
                 if (int(ScaleSignal) == 1)
                 {
                     h = s->Draw(pv, the_cut * "50" * "(LHEWeight[1121]/LHEWeight[0])", the_cut * "50" * "(LHEWeight[1121]/LHEWeight[0])");
-                    cout << "====> Scale Signal = " << ScaleSignal << endl;
+                    std::cout << "====> Scale Signal = " << ScaleSignal << std::endl;;
                 }
                 else
                     h = s->Draw(pv, the_cut * "(LHEWeight[1121]/LHEWeight[0])", the_cut * "(LHEWeight[1121]/LHEWeight[0])");
@@ -475,7 +475,7 @@ void myControlPlots(const char *cuttablefilename,
             {
                 // add additional cut to the cut string: Weight_nJets_FromDataMC
                 h = s->Draw(pv, the_cut* "Weight_nJets_FromDataMC", the_cut* "Weight_nJets_FromDataMC");
-                cout << "\n\n==> Updated cut: " << the_cut* "Weight_nJets_FromDataMC" << endl;
+                std::cout << "\t\t==> Updated cut: " << the_cut* "Weight_nJets_FromDataMC" << std::endl;;
                 // h = s->Draw(pv,  the_cut,  the_cut);
                 if (s->stackit())
                 {
@@ -574,12 +574,12 @@ void myControlPlots(const char *cuttablefilename,
             int maxbin = th1data->GetMaximumBin();
             maxval = std::max(maxval, th1data->GetBinContent(maxbin));
 
-            cout << "Total MC	= " << totevents << endl;
-            cout << "data	= " << ndata << endl;
-            cout << "data/MC	= " << renorm << endl;
-            Logfile << "Total MC	= " << totevents << endl;
-            Logfile << "data	= " << ndata << endl;
-            Logfile << "data/MC	= " << renorm << endl;
+            std::cout << "Total MC	= " << totevents << std::endl;;
+            std::cout << "data	= " << ndata << std::endl;;
+            std::cout << "data/MC	= " << renorm << std::endl;;
+            Logfile << "Total MC	= " << totevents << std::endl;;
+            Logfile << "data	= " << ndata << std::endl;;
+            Logfile << "data/MC	= " << renorm << std::endl;;
         }
 
         // Setup the stack and total
@@ -607,9 +607,9 @@ void myControlPlots(const char *cuttablefilename,
                 Leg->AddEntry(th1data, "Observed", "LP");
         }
 
-        vector<double> binErrSQ(pv.NBINS, 0.);
+        std::vector<double> binErrSQ(pv.NBINS, 0.);
 
-        vector<pair<TString, TH1D *>> v_legentries;
+        std::vector<std::pair<TString, TH1D *>> v_legentries;
 
         TString oldsamplename;
 
@@ -647,13 +647,13 @@ void myControlPlots(const char *cuttablefilename,
             // else
             //	h->Scale(ndata/h->Integral());
 
-            //      cout << s->name() << "	= " << Form("%4g,%7g,%4g",
+            //      std::cout << s->name() << "	= " << Form("%4g,%7g,%4g",
             //					 h->Integral(0,0),
             //					 h->Integral(1,h->GetNbinsX()+1),
             //					 h->Integral(h->GetNbinsX()+1,h->GetNbinsX()+1))
-            //	   << endl;
-            cout << s->name() << "	= " << Form("%7g", h->Integral(1, h->GetNbinsX() + 1)) << endl;
-            Logfile << s->name() << "	= " << Form("%7g", h->Integral(1, h->GetNbinsX() + 1)) << endl;
+            //	   << std::endl;;
+            std::cout << s->name() << "	= " << Form("%7g", h->Integral(1, h->GetNbinsX() + 1)) << std::endl;;
+            Logfile << s->name() << "	= " << Form("%7g", h->Integral(1, h->GetNbinsX() + 1)) << std::endl;;
 
             if (s->stackit())
             {
@@ -673,10 +673,10 @@ void myControlPlots(const char *cuttablefilename,
             h->Write();
         }
 
-        cout << "maxval " << maxval << endl;
+        std::cout << "maxval " << maxval << std::endl;;
 
         // Reverse the order for the legend
-        for (vector<pair<TString, TH1D *>>::reverse_iterator
+        for (std::vector<std::pair<TString, TH1D *>>::reverse_iterator
                  rit = v_legentries.rbegin();
              rit != v_legentries.rend();
              rit++)
@@ -861,13 +861,13 @@ void myControlPlots(const char *cuttablefilename,
                         h->SetLineColor(kBlue + 3);
                         if (int(ScaleSignal) == 1)
                         {
-                            cout << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << endl;
-                            Logfile << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << endl;
+                            std::cout << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << std::endl;;
+                            Logfile << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << std::endl;;
                         }
                         else
                         {
-                            cout << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1)) / sqrt((h->Integral(1, h->GetNbinsX() + 1)) + totevents) << endl;
-                            Logfile << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1)) / sqrt((h->Integral(1, h->GetNbinsX() + 1)) + totevents) << endl;
+                            std::cout << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1)) / sqrt((h->Integral(1, h->GetNbinsX() + 1)) + totevents) << std::endl;;
+                            Logfile << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1)) / sqrt((h->Integral(1, h->GetNbinsX() + 1)) + totevents) << std::endl;;
                         }
                         h->Draw("histsame");
                         h1 = (TH1D *)h->Clone();
@@ -879,10 +879,10 @@ void myControlPlots(const char *cuttablefilename,
                         // aqgc->SetLineStyle(11);
                         h->SetLineWidth(3.);
                         h->SetLineColor(kRed + 3);
-                        // cout << "Significance (aQGC)   = " << (h->Integral(1,h->GetNbinsX()+1))/sqrt((h->Integral(1,h->GetNbinsX()+1))+totevents) << endl;
-                        cout << "Significance (aQGC)   = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << endl;
-                        // Logfile << "Significance (aQGC)   = " << (h->Integral(1,h->GetNbinsX()+1))/sqrt((h->Integral(1,h->GetNbinsX()+1))+totevents) << endl;
-                        Logfile << "Significance (aQGC)   = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << endl;
+                        // std::cout << "Significance (aQGC)   = " << (h->Integral(1,h->GetNbinsX()+1))/sqrt((h->Integral(1,h->GetNbinsX()+1))+totevents) << std::endl;;
+                        std::cout << "Significance (aQGC)   = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << std::endl;;
+                        // Logfile << "Significance (aQGC)   = " << (h->Integral(1,h->GetNbinsX()+1))/sqrt((h->Integral(1,h->GetNbinsX()+1))+totevents) << std::endl;;
+                        Logfile << "Significance (aQGC)   = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << std::endl;;
                         h->Draw("histsame");
                         h2 = (TH1D *)h->Clone();
                         // h->Draw("e1same");
@@ -928,8 +928,8 @@ void myControlPlots(const char *cuttablefilename,
             hhratio->GetYaxis()->SetTitleOffset(0.5);
             hhratio->GetYaxis()->CenterTitle(true);
             hhratio->GetYaxis()->SetLabelSize(0.1);
-            cout << hhratio->GetNbinsX() << endl;
-            cout << th1tot->GetNbinsX() << endl;
+            std::cout << hhratio->GetNbinsX() << std::endl;;
+            std::cout << th1tot->GetNbinsX() << std::endl;;
             hhratio->Divide(th1tot);
             double binError(0.0), mcbinentry(0.0), mcerror(0.0);
             for (int i = 0; i < hhratio->GetNbinsX(); ++i)
@@ -963,22 +963,6 @@ void myControlPlots(const char *cuttablefilename,
             errbox = new TBox(pv.AMINRange, 0.974, pv.AMAXRange, 1.026); // lumi systematic uncertainty
             errbox->SetFillColor(kGray);
             errbox->Draw();
-
-#if 0
-      TF1 *f1 = new TF1("f1", "pol1",  pv.AMINRange, pv.AMAXRange);
-      f1->SetParameters(1.0,0.0);
-      f1->SetParameters(1,0.0);
-      //f1->FixParameter(0,1);
-      //f1->FixParameter(1,0);
-      //cout<<" par1   "f1->GetParameter(0)<<endl;
-      //cout<<" par2   "f1->GetParameter(1)<<endl;
-
-      f1->SetLineWidth(2);
-
-      TFitResultPtr r =  hhratio->Fit("f1", "RBS");
-      //TFitResultPtr r = hhratio->Fit(myFunc,"S");
-      r->Print("V");     // print full information of fit including covariance matrix
-#endif
 
             hhratio->Draw("esame");
             TLine *line1;
