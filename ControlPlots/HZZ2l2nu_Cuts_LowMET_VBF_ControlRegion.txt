@@ -3,8 +3,9 @@
 # For electron: HZZ2l2qNu_isELE == 1
 # For muon: HZZ2l2qNu_isELE == 0
 "electron channel"	"(HZZ2l2qNu_isELE==1)"
-"VBF category"	"(HZZ2l2nu_ifVBF==1)"
 "lepton pt"	"((pTL1>40)&&(pTL2>24))"
+# HZZ2l2qNu_cutOppositeChargeFlag == 0 means it is opposite charge
+"Opposite charge"	"(HZZ2l2qNu_cutOppositeChargeFlag==0)"
 "2l2nu event selection"  "(passZZ2l2nuSelection==1)"
-"MET_pt" "(MET_pt<100)"
-"Leptonic Z mass window" "((massZ1>75)&&(massZ1<105))"
+"MET_pt" "(MET_pt<60)"
+"VBF category"	"(HZZ2l2nu_ifVBF==1)"

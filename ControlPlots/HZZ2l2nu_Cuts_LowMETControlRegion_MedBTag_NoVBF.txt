@@ -8,6 +8,5 @@
 "Opposite charge"	"(HZZ2l2qNu_cutOppositeChargeFlag==0)"
 "2l2nu event selection"  "(passZZ2l2nuSelection==1)"
 "No b-tag"	"(HZZ2l2qNu_nMediumBtagJets==0)"
-#"No b-tag"	"(HZZ2l2qNu_nTightBtagJets==0)"
 "MET_pt" "(MET_pt<100)"
-#"VBF category"	"(HZZ2l2nu_ifVBF==0)"
+"VBF category"	"(HZZ2l2nu_ifVBF==0)"

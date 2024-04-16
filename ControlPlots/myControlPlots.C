@@ -291,6 +291,7 @@ void myControlPlots(const char *cuttablefilename,
                     //		    const plotVar_t plotvars[] = commonplotvars_chs,
                     const plotVar_t plotvars[] = controlplotvars_CHS,
                     const string OutRootFile = "testrk.root",
+                    const string OutDir = "OutDir",
                     const int ScaleSignal = 0,
                     const string RecreateAppend = "RECREATE",
                     const int isData = 1)
@@ -365,7 +366,12 @@ void myControlPlots(const char *cuttablefilename,
     {
 
         plotVar_t pv = plotvars[ivar];
-        TString outfile = TString("OutDir/") + TString(gSystem->BaseName(cuttablefilename)).ReplaceAll(".txt", "") + TString("_") + pv.outfile;
+        //  Create OutDir
+        gSystem->mkdir(OutDir.c_str(), kTRUE);
+        // copy file index.php from current directory  to OutDir
+        gSystem->CopyFile("index.php", TString(OutDir) + TString("/index.php"));
+
+        TString outfile = TString(OutDir) + TString("/") + TString(gSystem->BaseName(cuttablefilename)).ReplaceAll(".txt", "") + TString("_") + pv.outfile;
         Logfile.open(outfile + ".log");
         TString temp = TString("Yield of Variable : ") + pv.outfile;
         const std::string spaces(temp.Length(), ' ');
@@ -400,6 +406,7 @@ void myControlPlots(const char *cuttablefilename,
         // TCut the_cut(TString("L1_PrefweightDown*btag0Wgt*genWeight*trig_eff_Weight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));
         // TCut the_cut(TString("*(") + unwtcutstring + TString(")"));
         // TCut the_cut(TString("1*(") + unwtcutstring + TString(")"));
+
         TCut the_cut(TString("puWeight*(") + unwtcutstring + TString(")"));
         // TCut the_cut(TString("trig_eff_Weight*btag0Wgt*genWeight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));
         // TCut the_cut(TString("btag1Wgt*genWeight*trig_eff_Weight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));	// For Top control region
@@ -459,6 +466,17 @@ void myControlPlots(const char *cuttablefilename,
                     h = s->Draw(pv, the_cut * "50", the_cut * "50");
                 else
                     h = s->Draw(pv, the_cut, the_cut);
+                if (s->stackit())
+                {
+                    totevents += h->Integral(1, h->GetNbinsX() + 1);
+                }
+            }
+            else if (s->name().EqualTo("DYJets"))
+            {
+                // add additional cut to the cut string: Weight_nJets_FromDataMC
+                h = s->Draw(pv, the_cut* "Weight_nJets_FromDataMC", the_cut* "Weight_nJets_FromDataMC");
+                cout << "\n\n==> Updated cut: " << the_cut* "Weight_nJets_FromDataMC" << endl;
+                // h = s->Draw(pv,  the_cut,  the_cut);
                 if (s->stackit())
                 {
                     totevents += h->Integral(1, h->GetNbinsX() + 1);
