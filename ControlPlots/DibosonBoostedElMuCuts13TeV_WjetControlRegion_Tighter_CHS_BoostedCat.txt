@@ -13,4 +13,4 @@
 ##"2l2q event selection"	"passZZ2l2qSelection==1"
 "2l2nu event selection"  "passZZ2l2nuSelection==1"
 ##"isBoosted2l2q"	"isBoosted2l2q==1"
-##"Electron channel" "HZZ2l2qNu_isELE==1" 
+"electron channel"	"(HZZ2l2qNu_isELE==1)" 
