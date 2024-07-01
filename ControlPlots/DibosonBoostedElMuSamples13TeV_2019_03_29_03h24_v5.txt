@@ -1,0 +1,20 @@
+# name           file_location  xspb/lumipb  otherscale nMCevents       nMCNegEvents    colorcode       stackit
+data	/eos/user/a/avijay/2018data_rootfile.root        60000	1       1	0	1       0
+DYJets_1  /eos/user/a/avijay/merge/CMS_FulllSimulation/Scripts/dy_0to50.root   1202.85    1       184893494.0     1       2       1
+DYJets_2	/eos/user/a/avijay/outputfile/dy_50to100_meganew.root	147.038	1	107440405.0	1	7	1
+DYJets_3	/eos/user/a/avijay/outputfile/dy_100to250_new.root       37.908   1       56312357.0      1       9       1
+DYJets_4	/eos/user/a/avijay/outputfile/dy_250to400_new.root       0.14804   1       24195330.0      1       46       1
+DYJets_5	/eos/user/a/avijay/signal-bkg-MC-samples/drellyan/dy_400to650/dy_400to650.root       0.007629   1       3936102.0      1       36       1
+DYJets_6	/eos/user/a/avijay/merge/CMS_FulllSimulation/Scripts/dy_650toInf.root	0.00005201	1	3007236.0	1	41	1
+TTJets	/eos/user/a/avijay/merge/CMS_FulllSimulation/Scripts/TTJets.root	831.76	1	282578758.0	1	3	1	
+WWTo2L2Nu	/eos/user/a/avijay/merge/CMS_FulllSimulation/Scripts/WWTo2L2Nu.root	11.09	1	9994000.0	1	4	1
+WZTo2Q2L	/eos/user/a/avijay/merge/CMS_FulllSimulation/Scripts/WZTo2Q2L.root	6.419 1	22182798.0	1	5	1
+ZZTo2Q2L	/eos/user/a/avijay/merge/CMS_FulllSimulation/Scripts/ZZTo2Q2L.root	3.696	1	24685095.0	1	6	1
+#####DYJets_PS_1	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-70to100_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_70to100.root	146.5	1	17004433	1	47	1
+#####DYJets_PS_2	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-100to200_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_100to200.root	160.7	1	26202328	1	28	1
+#####DYJets_PS_3	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-200to400_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_200to400.root	48.63	1	18455718	1	40	1
+#####DYJets_PS_4	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-400to600_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_400to600.root	6.993	1	8682257	1	25	1
+#####DYJets_PS_5	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-600to800_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_600to800.root	1.761	1	7035971	1	32	1
+#DYJets_PS_6	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-800to1200_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_800to1200.root	0.8021	1	6554679	1	30	1
+#DYJets_PS_7	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-1200to2500_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_1200to2500.root	0.1937	1	5966661	1	44	1
+#DYJets_PS_8	/eos/user/a/avijay/HZZCondorjobRun2018_v9/DYJetsToLL_M-50_HT-2500toInf_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/DYJetsToLL_M-50_2500toInf.root	0.003514	1	1978203	1	41	1
