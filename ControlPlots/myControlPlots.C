@@ -435,11 +435,13 @@ void myControlPlots(const char *cuttablefilename,
                     totevents += h->Integral(1, h->GetNbinsX() + 1);
                 }
             }
-            else if (s->name().EqualTo("Z+jets"))
+            //else if (s->name().EqualTo("Z+jets"))
+            else if (s->name().EqualTo("DYJets"))
             {
                 // add additional cut to the cut string: Weight_nJets_FromDataMC
                 //h = s->Draw(pv, the_cut* "Weight_nJets_FromDataMC", the_cut* "Weight_nJets_FromDataMC");  //##AV##
-                std::cout << "\t\t==> Updated cut: " << the_cut* "Weight_nJets_FromDataMC" << std::endl;;
+		//h = s->Draw(pv, the_cut* "Weight_nJets_FromDataMC_ge1jet", the_cut* "Weight_nJets_FromDataMC_ge1jet");  //##AV##
+		//std::cout << "\t\t==> Updated cut: " << the_cut* "Weight_nJets_FromDataMC" << std::endl;;
                h = s->Draw(pv,  the_cut,  the_cut);    //uncommented ##AV##
                 if (s->stackit())
                 {

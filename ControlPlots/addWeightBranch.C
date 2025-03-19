@@ -3,7 +3,7 @@
 #include <TH1D.h>
 #include <TBranch.h>
 
-void addWeightBranch(const char *filename = "DY_400to650.root")
+void addWeightBranch(const char *filename = "/eos/user/a/avijay/HZZ_mergedrootfiles/drellyan_ptz_0to50.root")
 {
     // Open the ROOT file
     TFile* file = TFile::Open(filename, "UPDATE");
@@ -26,7 +26,7 @@ void addWeightBranch(const char *filename = "DY_400to650.root")
     Bool_t isELE; // Branch name "HZZ2l2qNu_isELE"
 
     // Create a new branch for the weight
-    TBranch* weightBranch = tree->Branch("Weight_nJets_FromDataMC", &weight, "Weight_nJets_FromDataMC/F");
+    TBranch* weightBranch = tree->Branch("Weight_nJets_FromDataMC_ge1jet", &weight, "Weight_nJets_FromDataMC_ge1jet/F");
 
     // Assume there is already a branch named "nJets" which holds the number of jets in each event
     tree->SetBranchAddress("HZZ2l2qNu_nJets", &nJets);
@@ -40,29 +40,54 @@ void addWeightBranch(const char *filename = "DY_400to650.root")
         // if (i>500) break;
 
         // Assign weights based on the number of jets
-        if (isELE) {
-            if (nJets == 2) weight = 0.6309039;
-            else if (nJets == 3) weight = 0.6622253;
-            else if (nJets == 4) weight = 0.7406964;
-            else if (nJets == 5) weight = 0.7932729;
-            else if (nJets == 6) weight = 0.8128035;
-            else if (nJets == 7) weight = 0.9813254;
-            else if (nJets == 8) weight = 0.9323355;
-            else if (nJets >= 9) weight = 1.610185;
+	if (isELE) {
+	    if (nJets == 1) weight = 0.8824074;
+	    else if (nJets == 2) weight = 0.68684125;
+            else if (nJets == 3) weight = 0.76812147;
+            else if (nJets == 4) weight = 0.91860612;
+            else if (nJets == 5) weight = 1.10500528;
+            else if (nJets == 6) weight = 1.31654433;
+            else if (nJets == 7) weight = 1.64961608;
+            else if (nJets == 8) weight = 2.37517279;
+            else if (nJets >= 9) weight = 10.7921858 ;
             else weight = 1.0; // Default weight for other cases (e.g., nJets < 2)
-        }
+	} // for ge1jet
+        /*if (isELE) {
+            if (nJets == 2) weight = 0.6134163135791069;
+            else if (nJets == 3) weight = 0.6998911097413478;
+            else if (nJets == 4) weight = 0.8684340959074924;
+            else if (nJets == 5) weight = 0.9863043200514038;
+            else if (nJets == 6) weight = 1.1559435285279487;
+            else if (nJets == 7) weight = 1.7876879342877086;
+            else if (nJets == 8) weight = 1.3072115933482635;
+            else if (nJets >= 9) weight = 0.758184751731264;
+            else weight = 1.0; // Default weight for other cases (e.g., nJets < 2)
+        }*/    // for VBF
         else
         {
-            if (nJets == 2) weight = 0.5907087;
-            else if (nJets == 3) weight = 0.6477573;
-            else if (nJets == 4) weight = 0.6790592;
-            else if (nJets == 5) weight = 0.7127956;
-            else if (nJets == 6) weight = 0.7098707;
-            else if (nJets == 7) weight = 1.038777;
-            else if (nJets == 8) weight = 1.039902;
-            else if (nJets >= 9) weight = 0.9646039;
+	    if (nJets == 1) weight = 0.949076302;
+            else if (nJets == 2) weight = 0.733207624;
+            else if (nJets == 3) weight = 0.816821098;
+            else if (nJets == 4) weight = 0.990226448;
+            else if (nJets == 5) weight = 1.183387309;
+            else if (nJets == 6) weight = 1.422906636;
+            else if (nJets == 7) weight = 1.813024674;
+            else if (nJets == 8) weight = 1.25945774;
+            else if (nJets >= 9) weight = 1.796557795;
             else weight = 1.0; // Default weight for other cases (e.g., nJets < 2)
-        }
+        } // for ge1jet
+       /*
+	{
+            if (nJets == 2) weight = 0.6482485565055438;
+            else if (nJets == 3) weight = 0.744610505216653;
+            else if (nJets == 4) weight = 0.9354411582643493;
+            else if (nJets == 5) weight = 1.1315308433742537;
+            else if (nJets == 6) weight = 1.2286138112624483;
+            else if (nJets == 7) weight = 1.7392576081209716;
+            else if (nJets == 8) weight = 1.585752698779711;
+            else if (nJets >= 9) weight = 2.970844765079073;
+            else weight = 1.0; // Default weight for other cases (e.g., nJets < 2)
+        }*/   //for VBF
 
         // Fill the new branch with the computed weight
         weightBranch->Fill();
