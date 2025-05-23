@@ -373,7 +373,7 @@ void myControlPlots(const char *cuttablefilename,
         // TCut the_cut(TString("L1_PrefweightUp*btag0Wgt*genWeight*trig_eff_Weight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));
         // TCut the_cut(TString("L1_PrefweightDown*btag0Wgt*genWeight*trig_eff_Weight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));
         // TCut the_cut(TString("*(") + unwtcutstring + TString(")"));
-        // TCut the_cut(TString("1*(") + unwtcutstring + TString(")")); //comented out 28Jun
+        //TCut the_cut(TString("1*(") + unwtcutstring + TString(")")); // PV weight not added
 
         TCut the_cut(TString("puWeight*(") + unwtcutstring + TString(")"));  //####AV###
         // TCut the_cut(TString("trig_eff_Weight*btag0Wgt*genWeight*id_eff_Weight*pu_Weight*(")+unwtcutstring+TString(")"));
