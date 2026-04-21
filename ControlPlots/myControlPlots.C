@@ -28,6 +28,7 @@
 #include "tdrstyle.C"
 #include "utils.C" // Tokenize
 #include "CMS_lumi.C"
+#include <cmath>
 
 // #include <Python.h>
 
@@ -650,7 +651,7 @@ void myControlPlots(const char *cuttablefilename,
 
         for (int ibin = 1; ibin <= th1totClone->GetNbinsX(); ++ibin)
         {
-            th1totClone->SetBinError(ibin, sqrt(binErrSQ[ibin - 1]));
+            th1totClone->SetBinError(ibin, std::sqrt(binErrSQ[ibin - 1]));
         }
 
         //============================================================
@@ -795,13 +796,13 @@ void myControlPlots(const char *cuttablefilename,
                         h->SetLineColor(kBlue + 3);
                         if (int(ScaleSignal) == 1)
                         {
-                            std::cout << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << std::endl;;
-                            Logfile << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << std::endl;;
+                            std::cout << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / std::sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << std::endl;;
+                            Logfile << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / std::sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << std::endl;;
                         }
                         else
                         {
-                            std::cout << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1)) / sqrt((h->Integral(1, h->GetNbinsX() + 1)) + totevents) << std::endl;;
-                            Logfile << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1)) / sqrt((h->Integral(1, h->GetNbinsX() + 1)) + totevents) << std::endl;;
+                            std::cout << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1)) / std::sqrt((h->Integral(1, h->GetNbinsX() + 1)) + totevents) << std::endl;;
+                            Logfile << "Significance (SM EWK) = " << (h->Integral(1, h->GetNbinsX() + 1)) / std::sqrt((h->Integral(1, h->GetNbinsX() + 1)) + totevents) << std::endl;;
                         }
                         h->Draw("histsame");
                         h1 = (TH1D *)h->Clone();
@@ -813,10 +814,10 @@ void myControlPlots(const char *cuttablefilename,
                         // aqgc->SetLineStyle(11);
                         h->SetLineWidth(3.);
                         h->SetLineColor(kRed + 3);
-                        // std::cout << "Significance (aQGC)   = " << (h->Integral(1,h->GetNbinsX()+1))/sqrt((h->Integral(1,h->GetNbinsX()+1))+totevents) << std::endl;;
-                        std::cout << "Significance (aQGC)   = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << std::endl;;
-                        // Logfile << "Significance (aQGC)   = " << (h->Integral(1,h->GetNbinsX()+1))/sqrt((h->Integral(1,h->GetNbinsX()+1))+totevents) << std::endl;;
-                        Logfile << "Significance (aQGC)   = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << std::endl;;
+                        // std::cout << "Significance (aQGC)   = " << (h->Integral(1,h->GetNbinsX()+1))/std::sqrt((h->Integral(1,h->GetNbinsX()+1))+totevents) << std::endl;;
+                        std::cout << "Significance (aQGC)   = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / std::sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << std::endl;;
+                        // Logfile << "Significance (aQGC)   = " << (h->Integral(1,h->GetNbinsX()+1))/std::sqrt((h->Integral(1,h->GetNbinsX()+1))+totevents) << std::endl;;
+                        Logfile << "Significance (aQGC)   = " << (h->Integral(1, h->GetNbinsX() + 1) / 50) / std::sqrt((h->Integral(1, h->GetNbinsX() + 1) / 50) + totevents) << std::endl;;
                         h->Draw("histsame");
                         h2 = (TH1D *)h->Clone();
                         // h->Draw("e1same");
@@ -829,7 +830,7 @@ void myControlPlots(const char *cuttablefilename,
         }
 
         // cmspre(intLUMIinvpb/1000.0);
-        CMS_lumi(d1, 4, 10);
+        //CMS_lumi(d1, 4, 10);
         // th1data->Draw("Axissame");
         gPad->RedrawAxis();
         TH1D *hhratio;
@@ -875,11 +876,12 @@ void myControlPlots(const char *cuttablefilename,
                     mcerror /= mcbinentry;
                 else
                     mcerror = 0.0;
-                binError = sqrt(binError * binError + mcerror * mcerror);
+                binError = std::sqrt(binError * binError + mcerror * mcerror);
                 hhratio->SetBinError(i, binError);
             }
             th1emptyclone = new TH1D("th1emptyclone", "th1emptyclone", pv.ANBINS, pv.AMINRange, pv.AMAXRange);
-            th1emptyclone->GetYaxis()->SetRangeUser(0.1, 2.8000);
+            //th1emptyclone->GetYaxis()->SetRangeUser(0.1, 2.8000);
+	    th1emptyclone->GetYaxis()->SetRangeUser(0.5, 1.5);
             th1emptyclone->GetXaxis()->SetTitle(pv.xlabel);
             th1emptyclone->GetXaxis()->SetTitleOffset(0.9);
             th1emptyclone->GetXaxis()->SetTitleSize(0.15);
@@ -920,7 +922,7 @@ void myControlPlots(const char *cuttablefilename,
         }
 
         c1->Print(outfile + ".pdf");
-        c1->Print(outfile + ".png");
+        //c1->Print(outfile + ".png");
         c1->Print(outfile + ".root");
         c1->Print(outfile + ".C");
         // c1->Print(outfile+".tex");
@@ -961,7 +963,7 @@ void myControlPlots(const char *cuttablefilename,
         gPad->SetRightMargin(0.05);
         gPad->SetLeftMargin(0.14);
 
-        gPad->SetLogy(1);
+        gPad->SetLogy(1); 
 
         th1totempty->SetMaximum(800 * maxval);
         th1totempty->SetMinimum(0.001);

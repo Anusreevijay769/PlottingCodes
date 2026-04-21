@@ -1,17 +1,15 @@
 #  Name                     Cut string
 ##########################################
-# For electron: HZZ2l2qNu_isELE == 1
-# For muon: HZZ2l2qNu_isELE == 0
 "electron channel"	"(HZZ2l2qNu_isELE==1)"
+"lepton pt"     "((pTL1>25)&&(pTL2>25))"
 # HZZ2l2qNu_cutOppositeChargeFlag == 0 means it is opposite charge
 "Opposite charge"	"(HZZ2l2qNu_cutOppositeChargeFlag==0)"
 "2l2nu event selection"  "(passZZ2l2nuSelection==1)"
 "No b-tag"	"(HZZ2l2qNu_nMediumBtagJets==0)"
-"MET_pt" "(MET_pt<100)"
+"pT_MET" "(pT_MET<100)"
 "VBF category"	"(HZZ2l2nu_ifVBF==0)"
 "Mll"   "(massZ1>76&&massZ1<106)"
-#"HZZ2l2nu_minDPhi_METAK4" "HZZ2l2nu_minDPhi_METAK4>0.5"
+#"HZZ2l2nu_minDPhi_METAK4" "HZZ2l2nu_minDPhi_METAK4>0.5" #not including for the moment
 "greater than or equal to 1 jet category"	"(HZZ2l2qNu_nJets>=1)"
 "single lepton trigger"    "Triggers_HZZ2l2nu_SingleLep == 1"
-"lepton pt"     "((pTL1>70)&&(pTL2>50))"
-"z1 pt"         "(pTZ1 > 90)"
+"z1 pt"         "(pTZ1 > 55)"
