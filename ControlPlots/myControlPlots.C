@@ -452,6 +452,37 @@ void myControlPlots(const char *cuttablefilename,
             else
             {
                 h = s->Draw(pv, the_cut, the_cut);
+                // scaling for Non resonant backgrounds.
+                const double NRB_SF = 0.0786;
+
+                TString fname = s->filename();
+
+                bool isNRB = false;
+
+                // Top samples
+                if (s->name().EqualTo("Top"))
+                isNRB = true;
+
+                // WJets samples
+                if (s->name().EqualTo("WJets"))
+                isNRB = true;
+
+                // WW samples
+                if (fname.Contains("WWTo2L2Nu") ||
+                fname.Contains("GluGluToWW"))
+                isNRB = true;
+
+                // WWZ only
+                if (fname.Contains("WWZ"))
+                isNRB = true;
+
+                if (isNRB)
+                {
+                    h->Scale(NRB_SF);
+
+                std::cout << " --> Applied NRB SF = " << NRB_SF << " to " << fname << std::endl;
+    }
+
                 if (s->stackit())
                 {
                     totevents += h->Integral(1, h->GetNbinsX() + 1);
