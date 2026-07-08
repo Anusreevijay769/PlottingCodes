@@ -453,7 +453,7 @@ void myControlPlots(const char *cuttablefilename,
             {
                 h = s->Draw(pv, the_cut, the_cut);
                 // scaling for Non resonant backgrounds.
-                const double NRB_SF = 0.0786;
+                const double NRB_SF = 1; //0.0786
 
                 TString fname = s->filename();
 
@@ -461,11 +461,11 @@ void myControlPlots(const char *cuttablefilename,
 
                 // Top samples
                 if (s->name().EqualTo("Top"))
-                isNRB = true;
+                isNRB = false;
 
                 // WJets samples
                 if (s->name().EqualTo("WJets"))
-                isNRB = true;
+                isNRB = false;
 
                 // WW samples
                 if (fname.Contains("WWTo2L2Nu") ||
@@ -474,6 +474,10 @@ void myControlPlots(const char *cuttablefilename,
 
                 // WWZ only
                 if (fname.Contains("WWZ"))
+                isNRB = false;
+
+                //// WWW only
+                if (fname.Contains("WWW"))
                 isNRB = true;
 
                 if (isNRB)

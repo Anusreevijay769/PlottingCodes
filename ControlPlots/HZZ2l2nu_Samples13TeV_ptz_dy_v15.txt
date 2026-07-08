@@ -52,3 +52,6 @@ DYJets	/eos/user/a/avijay/Mergedrootfiles_hzz_new/file_26march/drellyan_ptz_100t
 DYJets	/eos/user/a/avijay/Mergedrootfiles_hzz_new/file_26march/drellyan_ptz_250to400.root       3.701   1       24195330.0      1       2       1
 DYJets	/eos/user/a/avijay/Mergedrootfiles_hzz_new/file_26march/drellyan_ptz_400to650.root       0.5086   1       3936102.0      1       2       1
 DYJets	/eos/user/a/avijay/Mergedrootfiles_hzz_new/file_26march/drellyan_ptz_650toInf.root       0.04728   1       3994997.0      1       2       1
+#DYJets	/eos/user/a/avijay/Mergedrootfiles_hzz_new/file_26march/DYJetsToLL_M-10to50.root         20657.0    1       98663662.0      1       2       1
+#DYJets	/eos/user/a/avijay/Mergedrootfiles_hzz_new/file_26march/DYJetsToLL_M-50.root         6198.0    1       196626007.0      1       2       1
+#DYJets	/eos/user/a/avijay/Mergedrootfiles_hzz_new/file_26march/DYJetsToLL_M-50.root       6198.0   1       196626007.0      1       2       1
